@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Employee Registration</title>
+    <style>
+      .error {
+        color: red;
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Employee Registration</h2>
+    <form
+      onsubmit="return validateEmployee()"
+      action="../thankyou.html"
+      method="GET"
+    >
+      DOB: <input type="date" id="dob" /><br />
+      <span id="dobErr" class="error"></span><br />
+
+      Joining Date: <input type="date" id="joinDate" /><br />
+      <span id="joinErr" class="error"></span><br />
+
+      Salary: <input type="number" id="salary" /><br />
+      <span id="salaryErr" class="error"></span><br />
+
+      <input type="submit" value="Register" />
+    </form>
+
+    <script>
+      function validateEmployee() {
+        let valid = true;
+
+        const dobInput = document.getElementById("dob").value;
+        const joinInput = document.getElementById("joinDate").value;
+        const salary = parseFloat(document.getElementById("salary").value);
+
+        // Clear previous errors
+        document.getElementById("dobErr").innerText = "";
+        document.getElementById("joinErr").innerText = "";
+        document.getElementById("salaryErr").innerText = "";
+
+        if (!dobInput) {
+          document.getElementById("dobErr").innerText =
+            "Please select Date of Birth.";
+          valid = false;
+        }
+
+        if (!joinInput) {
+          document.getElementById("joinErr").innerText =
+            "Please select Joining Date.";
+          valid = false;
+        }
+
+        if (dobInput >= joinInput) {
+          document.getElementById("dobErr").innerText =
+            "DOB must be before Joining Date.";
+          valid = false;
+        }
+
+        if (isNaN(salary) || salary <= 0) {
+          document.getElementById("salaryErr").innerText =
+            "Salary must be a positive number.";
+          valid = false;
+        }
+
+        return valid;
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Student Registration Form</title>
+    <style>
+      .error {
+        color: red;
+        font-size: 14px;
+      }
+      input {
+        display: block;
+        margin-bottom: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Student Registration</h2>
+    <form
+      onsubmit="return validateForm()"
+      action="../thankyou.html"
+      method="GET"
+    >
+      First Name:
+      <input type="text" id="firstName" />
+      <span class="error" id="firstNameError"></span><br />
+
+      Last Name:
+      <input type="text" id="lastName" />
+      <span class="error" id="lastNameError"></span><br />
+
+      Age:
+      <input type="number" id="age" />
+      <span class="error" id="ageError"></span><br />
+
+      Email:
+      <input type="text" id="email" />
+      <span class="error" id="emailError"></span><br />
+
+      Mobile:
+      <input type="text" id="mobile" />
+      <span class="error" id="mobileError"></span><br />
+
+      Date of Birth:
+      <input type="date" id="dob" />
+      <span class="error" id="dobError"></span><br />
+
+      <button type="submit">Register</button>
+    </form>
+
+    <script>
+      function validateForm() {
+        let isValid = true;
+
+        // Clear previous errors
+        document
+          .querySelectorAll(".error")
+          .forEach((el) => (el.innerText = ""));
+
+        // First Name & Last Name
+        let nameRegex = /^[A-Za-z]+$/;
+        let firstName = document.getElementById("firstName").value.trim();
+        let lastName = document.getElementById("lastName").value.trim();
+
+        if (!nameRegex.test(firstName)) {
+          document.getElementById("firstNameError").innerText =
+            "Only alphabets allowed";
+          isValid = false;
+        }
+
+        if (!nameRegex.test(lastName)) {
+          document.getElementById("lastNameError").innerText =
+            "Only alphabets allowed";
+          isValid = false;
+        }
+
+        // Age
+        let age = parseInt(document.getElementById("age").value);
+        if (isNaN(age) || age < 18 || age > 50) {
+          document.getElementById("ageError").innerText =
+            "Age must be between 18 and 50";
+          isValid = false;
+        }
+
+        // Email
+        let email = document.getElementById("email").value.trim();
+        let emailRegex =
+          /^[a-zA-Z0-9._-]+@[a-zA-Z0-9-]+(\.[a-zA-Z]{2,3}){1,2}$/;
+        if (!emailRegex.test(email)) {
+          document.getElementById("emailError").innerText = "Enter valid email";
+          isValid = false;
+        }
+
+        // Mobile
+        let mobile = document.getElementById("mobile").value.trim();
+        let mobileRegex = /^(\+91[\s]?)?[6-9]\d{9}$/;
+        if (!mobileRegex.test(mobile)) {
+          document.getElementById("mobileError").innerText =
+            "Enter 10-digit number";
+          isValid = false;
+        }
+
+        // DOB
+        let dob = document.getElementById("dob").value;
+        if (dob === "") {
+          document.getElementById("dobError").innerText = "Please select DOB";
+          isValid = false;
+        }
+
+        return isValid;
+      }
+    </script>
+  </body>
+</html>

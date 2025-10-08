@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Login</title>
+    <style>
+      .error {
+        color: red;
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Login</h2>
+    <form
+      onsubmit="return validateLogin()"
+      action="../thankyou.html"
+      method="GET"
+    >
+      Email: <input type="text" id="email" /><br />
+      <span id="emailErr" class="error"></span><br />
+
+      <input type="submit" value="Login" />
+    </form>
+
+    <script>
+      function validateLogin() {
+        let valid = true;
+        const email = document.getElementById("email").value.trim();
+        const emailRegex =
+          /^[a-zA-Z0-9._-]+@[a-zA-Z0-9-]+(\.[a-zA-Z]{2,3}){1,2}$/;
+
+        document.getElementById("emailErr").innerText = "";
+
+        if (!emailRegex.test(email)) {
+          document.getElementById("emailErr").innerText =
+            "Enter a valid email.";
+          valid = false;
+        }
+
+        return valid;
+      }
+    </script>
+  </body>
+</html>

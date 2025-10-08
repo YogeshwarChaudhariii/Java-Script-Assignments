@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Student Registration</title>
+    <style>
+      .error {
+        color: red;
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Student Registration</h2>
+    <form
+      onsubmit="return validateForm()"
+      action="../thankyou.html"
+      method="GET"
+    >
+      First Name: <input type="text" id="firstName" /><br />
+      <span id="firstErr" class="error"></span><br />
+
+      Last Name: <input type="text" id="lastName" /><br />
+      <span id="lastErr" class="error"></span><br />
+
+      Age: <input type="number" id="age" /><br />
+      <span id="ageErr" class="error"></span><br />
+
+      <input type="submit" value="Register" />
+    </form>
+
+    <script>
+      function validateForm() {
+        let valid = true;
+        const nameRegex = /^[A-Za-z]+$/;
+
+        const first = document.getElementById("firstName").value.trim();
+        const last = document.getElementById("lastName").value.trim();
+        const age = parseInt(document.getElementById("age").value);
+
+        document.getElementById("firstErr").innerText = "";
+        document.getElementById("lastErr").innerText = "";
+        document.getElementById("ageErr").innerText = "";
+
+        if (!nameRegex.test(first)) {
+          document.getElementById("firstErr").innerText =
+            "Only alphabets allowed.";
+          valid = false;
+        }
+        if (!nameRegex.test(last)) {
+          document.getElementById("lastErr").innerText =
+            "Only alphabets allowed.";
+          valid = false;
+        }
+        if (isNaN(age) || age < 18 || age > 50) {
+          document.getElementById("ageErr").innerText =
+            "Age must be between 18 and 50.";
+          valid = false;
+        }
+
+        return valid;
+      }
+    </script>
+  </body>
+</html>
