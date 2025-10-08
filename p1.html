@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Student Registration Form
+        </title>
+
+        <style>
+            .error
+            {
+                color: red;
+                font-size: 15px;
+            }
+
+            input
+            {
+                display: block;
+                margin-bottom: 5px;
+            }
+        </style>
+
+        <body>
+            <h2>Student Registration</h2>
+
+            <form onsubmit="return validateForm()" action="thankyou.html" method="GET">
+
+                First Name:
+                <input type="text", id="firstName">
+                <span class="error", id="firstNameError"></span>
+
+                Last Name:
+                <input type="text", id="lastName">
+                <span class="error", id="lastNameError"></span>
+
+                Email:
+                <input type="text", id="email">
+                <span class="error", id="emailError"></span>
+
+                Mobile:
+                <input type="text", id="mobileName">
+                <span class="error", id="mobileError"></span>
+
+                Age:
+                <input type="text", id="age">
+                <span class="error", id="ageError"></span>
+
+                Date of Birth:
+                <input type="date", id="dob">
+                <span class="error", id="dobError"></span>
+
+                <button type="submit">Register</button>
+            </form>
+
+            <script>
+                function validateForm()
+                {
+                    let valid = true;
+
+                    document.querySelectorAll(".error").forEach(el => el.innerText = "");
+
+                    let nameRegX = /^[A-Za-z]$/;
+                    let firstName = document.getElementById("firstName").value.trim();
+                    let lastName = document.getElementById("lastName").value.trim();
+
+                    if(!nameRegX.test(firstName))
+                    {
+                        document.getElementById("firstNameError").innerText = "Name issue";
+                        valid = false;
+                    }
+
+                    if(!nameRegX.test(lastName))
+                    {
+                        document.getElementById("lastNameError").innerText = "Name issue";
+                        valid = false
+                    }
+
+                    let age = parseInt(document.getElementById("age").value);
+
+                    if (!isNan(age) || age < 18 || age > 50) 
+                    {
+                        document.getElementById("ageError").innerText = "enter valid age";
+                        valid = false;
+                    }
+                }
+            </script>
+        </body>
+    </head>
+</html>
